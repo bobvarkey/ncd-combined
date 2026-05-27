@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { DiscriminantResult, EvaluationResult } from '../types';
-import { FlaskConical, ChevronDown, ChevronUp, Info, AlertCircle } from 'lucide-react';
+import { FlaskConical, ChevronDown, ChevronUp, Info, AlertCircle, TrendingUp, TrendingDown } from 'lucide-react';
 
 interface Props {
   results: DiscriminantResult[];
@@ -9,6 +9,19 @@ interface Props {
   consensus: EvaluationResult['consensus'];
   cbcParams: { mcv: number; mch: number; rbc: number; rdw: number; hgb: number };
 }
+
+// Interpretation explanations
+const INTERPRETATION_EXPLANATIONS: Record<string, { ida: string; thal: string }> = {
+  'Mentzer Index': { ida: 'MCV/RBC >13 → higher ratio suggests IDA', thal: '≤13 suggests thalassemia trait' },
+  'England-Fraser Index': { ida: 'Positive → favors IDA', thal: 'Negative → favors thalassemia' },
+  'Shine-Lal Index': { ida: '>1530 suggests IDA', thal: '≤1530 suggests thalassemia' },
+  'Green-King Index': { ida: '>65 suggests IDA', thal: '≤65 suggests thalassemia' },
+  'RDW Index (RDWI / Jayabose)': { ida: '>220 suggests IDA', thal: '≤220 suggests thalassemia' },
+  'Srivastava Index': { ida: '>3.8 suggests IDA', thal: '≤3.8 suggests thalassemia' },
+  'Ricerca Index': { ida: '>4.4 suggests IDA', thal: '≤4.4 suggests thalassemia' },
+  'Das Gupta Index': { ida: 'Negative → IDA', thal: 'Positive → thalassemia' },
+  'Bordbar Index': { ida: 'Higher = more IDA-like', thal: 'Lower = more thalassemia-like' },
+};
 
 // Required parameters for each index
 const INDEX_PARAMS: Record<string, string[]> = {
@@ -161,12 +174,12 @@ export default function DiscriminantTable({ results, idaCount, thalCount, consen
                           ) : r.interpretation === 'IDA' ? (
                             <div className="flex flex-col items-center gap-1">
                               <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-900/30 text-rose-400 border border-rose-800">IDA</span>
-                              <span className="text-[10px] text-rose-400/70">Iron def.</span>
+                              <span className="text-[10px] text-rose-400/70">{INTERPRETATION_EXPLANATIONS[r.name]?.ida.split(' → ')[0] || 'Iron def.'}</span>
                             </div>
                           ) : (
                             <div className="flex flex-col items-center gap-1">
                               <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-900/30 text-sky-400 border border-sky-800">Thalassemia</span>
-                              <span className="text-[10px] text-sky-400/70">Trait</span>
+                              <span className="text-[10px] text-sky-400/70">{INTERPRETATION_EXPLANATIONS[r.name]?.thal.split(' → ')[0] || 'Trait'}</span>
                             </div>
                           )}
                         </td>
