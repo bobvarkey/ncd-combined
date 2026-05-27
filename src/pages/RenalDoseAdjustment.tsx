@@ -524,24 +524,102 @@ const RenalDoseAdjustment = () => {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-3">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input
-            placeholder="Search drug or class..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="pl-9"
-          />
+      <div className="space-y-3">
+        {/* Quick filter tabs */}
+        <div className="flex gap-2 flex-wrap">
+          <button
+            onClick={() => setClassFilter('all')}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              classFilter === 'all' 
+                ? 'bg-primary text-primary-foreground' 
+                : 'bg-muted text-muted-foreground hover:bg-muted/80'
+            }`}
+          >
+            All
+          </button>
+          <button
+            onClick={() => setClassFilter('SGLT2i')}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              classFilter === 'SGLT2i' 
+                ? 'bg-emerald-600 text-white' 
+                : 'bg-muted text-muted-foreground hover:bg-muted/80'
+            }`}
+          >
+            💊 SGLT2i
+          </button>
+          <button
+            onClick={() => setClassFilter('GLP-1 RA')}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              classFilter === 'GLP-1 RA' 
+                ? 'bg-violet-600 text-white' 
+                : 'bg-muted text-muted-foreground hover:bg-muted/80'
+            }`}
+          >
+            💉 GLP-1
+          </button>
+          <button
+            onClick={() => setClassFilter('Cephalosporin')}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              classFilter === 'Cephalosporin' 
+                ? 'bg-blue-600 text-white' 
+                : 'bg-muted text-muted-foreground hover:bg-muted/80'
+            }`}
+          >
+            🔴 Cephalosporins
+          </button>
+          <button
+            onClick={() => setClassFilter('Penicillin')}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              classFilter === 'Penicillin' 
+                ? 'bg-amber-600 text-white' 
+                : 'bg-muted text-muted-foreground hover:bg-muted/80'
+            }`}
+          >
+            🔴 Penicillins
+          </button>
+          <button
+            onClick={() => setClassFilter('Fluoroquinolone')}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              classFilter === 'Fluoroquinolone' 
+                ? 'bg-cyan-600 text-white' 
+                : 'bg-muted text-muted-foreground hover:bg-muted/80'
+            }`}
+          >
+            🔴 Fluoroquinolones
+          </button>
+          <button
+            onClick={() => setClassFilter('Macrolide')}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              classFilter === 'Macrolide' 
+                ? 'bg-pink-600 text-white' 
+                : 'bg-muted text-muted-foreground hover:bg-muted/80'
+            }`}
+          >
+            🔴 Macrolides
+          </button>
+          <button
+            onClick={() => setClassFilter('Glycopeptide')}
+            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              classFilter === 'Glycopeptide' 
+                ? 'bg-rose-600 text-white' 
+                : 'bg-muted text-muted-foreground hover:bg-muted/80'
+            }`}
+          >
+            🔴 Vancomycin
+          </button>
         </div>
-        <select
-          value={classFilter}
-          onChange={e => setClassFilter(e.target.value)}
-          className="h-10 rounded-md border border-input bg-background px-3 text-sm"
-        >
-          <option value="all">All Classes</option>
-          {classes.map(c => <option key={c} value={c}>{c}</option>)}
-        </select>
+
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              placeholder="Search drug or class..."
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              className="pl-9"
+            />
+          </div>
+        </div>
       </div>
 
       {/* Table */}
