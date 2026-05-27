@@ -159,9 +159,15 @@ export default function DiscriminantTable({ results, idaCount, thalCount, consen
                           {r.interpretation === 'N/A' ? (
                             <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-gray-800 text-gray-500 border border-gray-700">—</span>
                           ) : r.interpretation === 'IDA' ? (
-                            <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-900/30 text-rose-400 border border-rose-800">IDA</span>
+                            <div className="flex flex-col items-center gap-1">
+                              <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-900/30 text-rose-400 border border-rose-800">IDA</span>
+                              <span className="text-[10px] text-rose-400/70">Iron def.</span>
+                            </div>
                           ) : (
-                            <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-900/30 text-sky-400 border border-sky-800">Thalassemia</span>
+                            <div className="flex flex-col items-center gap-1">
+                              <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-900/30 text-sky-400 border border-sky-800">Thalassemia</span>
+                              <span className="text-[10px] text-sky-400/70">Trait</span>
+                            </div>
                           )}
                         </td>
                         <td className="py-3 px-4 text-xs text-gray-500 hidden lg:table-cell">{r.reference}</td>
