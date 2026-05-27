@@ -136,6 +136,13 @@ export default function Anemia() {
                   idaCount={result.idaCount}
                   thalCount={result.thalCount}
                   consensus={result.consensus}
+                  cbcParams={{
+                    mcv: parseFloat(cbc.mcv) || NaN,
+                    mch: parseFloat(cbc.mch) || NaN,
+                    rbc: parseFloat(cbc.rbc) || NaN,
+                    rdw: parseFloat(cbc.rdw) || NaN,
+                    hgb: parseFloat(cbc.hgb) || NaN,
+                  }}
                 />
               </div>
             )}
