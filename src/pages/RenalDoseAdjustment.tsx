@@ -512,7 +512,7 @@ const RenalDoseAdjustment = () => {
           <FlaskConical className="w-5 h-5 text-primary" />
           Renal Dose Adjustment
         </h1>
-        <p className="text-sm text-muted-foreground">eGFR-based dose modifications for diabetes medications (ADA 2026 + KDIGO)</p>
+        <p className="text-sm text-muted-foreground">eGFR-based dose modifications for NCD medications + antibiotics (ADA 2026 + KDIGO)</p>
       </div>
 
       {/* Legend */}
