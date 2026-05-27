@@ -88,6 +88,17 @@ import FeedbackTips from "@/pages/FeedbackTips";
 
 // 404
 import NotFound from "@/components/NotFound";
+import React from "react";
+
+// Layout wrapper: sidebar + content side by side
+const SidebarLayout = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex min-h-screen">
+    <TabNavigation />
+    <main className="flex-1 min-w-0">
+      {children}
+    </main>
+  </div>
+);
 
 const queryClient = new QueryClient();
 
@@ -153,44 +164,44 @@ const App = () => (
           <Route path="/db/*" element={<SidebarProvider><DiabetesBuddyLayout /></SidebarProvider>} />
 
           {/* Hard Mode (full app) — all under /home or direct paths */}
-          <Route path="/home" element={<><TabNavigation /><Home /></>} />
-          <Route path="/diabetes" element={<><TabNavigation /><Diabetes /></>} />
-          <Route path="/hypertension" element={<><TabNavigation /><Hypertension /></>} />
-          <Route path="/lipids" element={<><TabNavigation /><Lipids /></>} />
-          <Route path="/anemia" element={<><TabNavigation /><Anemia /></>} />
-          <Route path="/diabetes/assessment" element={<><TabNavigation /><DiabetesAssessment /></>} />
-          <Route path="/diabetes/overview" element={<><TabNavigation /><DiabetesOverview /></>} />
-          <Route path="/diabetes/tab" element={<><TabNavigation /><DiabetesTab /></>} />
-          <Route path="/diabetes/treatment" element={<><TabNavigation /><DiabetesTreatment /></>} />
-          <Route path="/diabetes/insulin-guide" element={<><TabNavigation /><InsulinGuide /></>} />
-          <Route path="/hypertension/assessment" element={<><TabNavigation /><HypertensionAssessment /></>} />
-          <Route path="/hypertension/medication-guide" element={<><TabNavigation /><HypertensionMedicationGuide /></>} />
-          <Route path="/hypertension/overview" element={<><TabNavigation /><HypertensionOverview /></>} />
-          <Route path="/hypertension/tab" element={<><TabNavigation /><HypertensionTab /></>} />
-          <Route path="/hypertension/treatment" element={<><TabNavigation /><HypertensionTreatment /></>} />
-          <Route path="/hypertension/clinical-cards" element={<><TabNavigation /><HypertensionClinicalCards /></>} />
-          <Route path="/lipids/assessment" element={<><TabNavigation /><LipidsAssessment /></>} />
-          <Route path="/lipids/overview" element={<><TabNavigation /><LipidsOverview /></>} />
-          <Route path="/lipids/tab" element={<><TabNavigation /><LipidsTab /></>} />
-          <Route path="/lipids/treatment" element={<><TabNavigation /><LipidsTreatment /></>} />
-          <Route path="/insulin-titration" element={<><TabNavigation /><InsulinTitrationCalc /></>} />
-          <Route path="/sliding-scale" element={<><TabNavigation /><SlidingScaleInsulinCalc /></>} />
-          <Route path="/hypo-risk" element={<><TabNavigation /><HypoRiskCalculatorCalc /></>} />
-          <Route path="/renal-dosing" element={<><TabNavigation /><RenalDoseAdjustmentCalc /></>} />
+          <Route path="/home" element={<SidebarLayout><Home /></SidebarLayout>} />
+          <Route path="/diabetes" element={<SidebarLayout><Diabetes /></SidebarLayout>} />
+          <Route path="/hypertension" element={<SidebarLayout><Hypertension /></SidebarLayout>} />
+          <Route path="/lipids" element={<SidebarLayout><Lipids /></SidebarLayout>} />
+          <Route path="/anemia" element={<SidebarLayout><Anemia /></SidebarLayout>} />
+          <Route path="/diabetes/assessment" element={<SidebarLayout><DiabetesAssessment /></SidebarLayout>} />
+          <Route path="/diabetes/overview" element={<SidebarLayout><DiabetesOverview /></SidebarLayout>} />
+          <Route path="/diabetes/tab" element={<SidebarLayout><DiabetesTab /></SidebarLayout>} />
+          <Route path="/diabetes/treatment" element={<SidebarLayout><DiabetesTreatment /></SidebarLayout>} />
+          <Route path="/diabetes/insulin-guide" element={<SidebarLayout><InsulinGuide /></SidebarLayout>} />
+          <Route path="/hypertension/assessment" element={<SidebarLayout><HypertensionAssessment /></SidebarLayout>} />
+          <Route path="/hypertension/medication-guide" element={<SidebarLayout><HypertensionMedicationGuide /></SidebarLayout>} />
+          <Route path="/hypertension/overview" element={<SidebarLayout><HypertensionOverview /></SidebarLayout>} />
+          <Route path="/hypertension/tab" element={<SidebarLayout><HypertensionTab /></SidebarLayout>} />
+          <Route path="/hypertension/treatment" element={<SidebarLayout><HypertensionTreatment /></SidebarLayout>} />
+          <Route path="/hypertension/clinical-cards" element={<SidebarLayout><HypertensionClinicalCards /></SidebarLayout>} />
+          <Route path="/lipids/assessment" element={<SidebarLayout><LipidsAssessment /></SidebarLayout>} />
+          <Route path="/lipids/overview" element={<SidebarLayout><LipidsOverview /></SidebarLayout>} />
+          <Route path="/lipids/tab" element={<SidebarLayout><LipidsTab /></SidebarLayout>} />
+          <Route path="/lipids/treatment" element={<SidebarLayout><LipidsTreatment /></SidebarLayout>} />
+          <Route path="/insulin-titration" element={<SidebarLayout><InsulinTitrationCalc /></SidebarLayout>} />
+          <Route path="/sliding-scale" element={<SidebarLayout><SlidingScaleInsulinCalc /></SidebarLayout>} />
+          <Route path="/hypo-risk" element={<SidebarLayout><HypoRiskCalculatorCalc /></SidebarLayout>} />
+          <Route path="/renal-dosing" element={<SidebarLayout><RenalDoseAdjustmentCalc /></SidebarLayout>} />
           <Route path="/respiratory/simple" element={<><ModeNavSimple /><RespiratorySimple /></>} />
           <Route path="/respiratory/moderate" element={<><ModeNavModerate /><RespiratoryModerate /></>} />
-          <Route path="/respiratory" element={<><TabNavigation /><RespiratoryPage /></>} />
-          <Route path="/diabetes/medication-algorithm" element={<><TabNavigation /><DiabetesMedicationAlgorithmCalc /></>} />
-          <Route path="/lipid-panel" element={<><TabNavigation /><LipidPanelCalc /></>} />
-          <Route path="/ascvd-risk" element={<><TabNavigation /><AscvdEmrCalc /></>} />
-          <Route path="/gfr-calculator" element={<><TabNavigation /><GfrCalculatorCalc /></>} />
-          <Route path="/drug-interactions" element={<><TabNavigation /><DrugInteractionCheckerCalc /></>} />
-          <Route path="/htn/treatment-algorithm" element={<><TabNavigation /><AntihypertensiveTreatmentAlgorithmCalc /></>} />
-          <Route path="/htn/potency-table" element={<><TabNavigation /><AntihypertensivePotencyTableCalc /></>} />
-          <Route path="/obesity/bmi-calculator" element={<><TabNavigation /><BmiCalculatorCalc /></>} />
-          <Route path="/obesity/waist-height-ratio" element={<><TabNavigation /><WaistHeightRatioCalc /></>} />
-          <Route path="/obesity/glp1-algorithm" element={<><TabNavigation /><GLP1ObesityAlgorithmCalc /></>} />
-          <Route path="/diet-plan" element={<><TabNavigation /><DietPlanPage /></>} />
+          <Route path="/respiratory" element={<SidebarLayout><RespiratoryPage /></SidebarLayout>} />
+          <Route path="/diabetes/medication-algorithm" element={<SidebarLayout><DiabetesMedicationAlgorithmCalc /></SidebarLayout>} />
+          <Route path="/lipid-panel" element={<SidebarLayout><LipidPanelCalc /></SidebarLayout>} />
+          <Route path="/ascvd-risk" element={<SidebarLayout><AscvdEmrCalc /></SidebarLayout>} />
+          <Route path="/gfr-calculator" element={<SidebarLayout><GfrCalculatorCalc /></SidebarLayout>} />
+          <Route path="/drug-interactions" element={<SidebarLayout><DrugInteractionCheckerCalc /></SidebarLayout>} />
+          <Route path="/htn/treatment-algorithm" element={<SidebarLayout><AntihypertensiveTreatmentAlgorithmCalc /></SidebarLayout>} />
+          <Route path="/htn/potency-table" element={<SidebarLayout><AntihypertensivePotencyTableCalc /></SidebarLayout>} />
+          <Route path="/obesity/bmi-calculator" element={<SidebarLayout><BmiCalculatorCalc /></SidebarLayout>} />
+          <Route path="/obesity/waist-height-ratio" element={<SidebarLayout><WaistHeightRatioCalc /></SidebarLayout>} />
+          <Route path="/obesity/glp1-algorithm" element={<SidebarLayout><GLP1ObesityAlgorithmCalc /></SidebarLayout>} />
+          <Route path="/diet-plan" element={<SidebarLayout><DietPlanPage /></SidebarLayout>} />
 
           {/* 404 */}
           <Route path="*" element={<NotFound />} />
