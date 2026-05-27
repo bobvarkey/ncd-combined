@@ -183,19 +183,26 @@ export function evaluate(cbc: CBCValues, sex: Sex): EvaluationResult {
   let thalCount = 0;
   let consensus: EvaluationResult['consensus'] = 'N/A';
 
-  if (isMicrocytic && hasAnemia && !isNaN(hgb) && !isNaN(mcv) && !isNaN(mch) && !isNaN(rbc) && !isNaN(rdw)) {
-    discriminantResults = computeDiscriminantIndices(hgb, mcv, mch, rbc, rdw);
-    idaCount = discriminantResults.filter(r => r.interpretation === 'IDA').length;
-    thalCount = discriminantResults.filter(r => r.interpretation === 'Thalassemia').length;
-    const total = idaCount + thalCount;
-    if (total === 0) {
-      consensus = 'N/A';
-    } else if (idaCount / total >= 0.6) {
-      consensus = 'IDA';
-    } else if (thalCount / total >= 0.6) {
-      consensus = 'Thalassemia';
-    } else {
-      consensus = 'Inconclusive';
+  if (isMicrocytic && hasAnemia) {
+    // Compute with whatever parameters are available
+    const hasMch = !isNaN(mch);
+    const hasRbc = !isNaN(rbc);
+    const hasRdw = !isNaN(rdw);
+    
+    if (hasRbc || hasMch || hasRdw) {
+      discriminantResults = computeDiscriminantIndices(hgb, mcv, mch, rbc, rdw);
+      idaCount = discriminantResults.filter(r => r.interpretation === 'IDA').length;
+      thalCount = discriminantResults.filter(r => r.interpretation === 'Thalassemia').length;
+      const total = idaCount + thalCount;
+      if (total === 0) {
+        consensus = 'N/A';
+      } else if (idaCount / total >= 0.6) {
+        consensus = 'IDA';
+      } else if (thalCount / total >= 0.6) {
+        consensus = 'Thalassemia';
+      } else {
+        consensus = 'Inconclusive';
+      }
     }
   }
 

@@ -85,7 +85,6 @@ import InsulinTherapy from "@/pages/InsulinTherapy";
 import Type1Pitfalls from "@/pages/Type1Pitfalls";
 import Type2Transition from "@/pages/Type2Transition";
 import FeedbackTips from "@/pages/FeedbackTips";
-import MSPage from "@/pages/MS";
 
 // 404
 import NotFound from "@/components/NotFound";
@@ -192,7 +191,6 @@ const App = () => (
           <Route path="/respiratory/simple" element={<><ModeNavSimple /><RespiratorySimple /></>} />
           <Route path="/respiratory/moderate" element={<><ModeNavModerate /><RespiratoryModerate /></>} />
           <Route path="/respiratory" element={<SidebarLayout><RespiratoryPage /></SidebarLayout>} />
-          <Route path="/ms" element={<SidebarLayout><MSPage /></SidebarLayout>} />
           <Route path="/diabetes/medication-algorithm" element={<SidebarLayout><DiabetesMedicationAlgorithmCalc /></SidebarLayout>} />
           <Route path="/lipid-panel" element={<SidebarLayout><LipidPanelCalc /></SidebarLayout>} />
           <Route path="/ascvd-risk" element={<SidebarLayout><AscvdEmrCalc /></SidebarLayout>} />
